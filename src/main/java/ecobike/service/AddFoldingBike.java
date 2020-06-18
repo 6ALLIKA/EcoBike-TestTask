@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AddFoldingBike implements Command {
-    private final String ERROR_MESSAGE = "Something goes wrong, try again";
+    private static final String ERROR_MESSAGE = "Something goes wrong, try again";
 
     @Override
     public List<AbstractBike> execute(List<AbstractBike> list) {
