@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AddSpeedelec implements Command {
+    private final String ERROR_MESSAGE = "Something goes wrong, try again";
+
     @Override
     public List<AbstractBike> execute(List<AbstractBike> list) {
         Scanner scanner = new Scanner(System.in);
@@ -17,7 +19,7 @@ public class AddSpeedelec implements Command {
         String input = scanner.nextLine();
         Speedelec product = new Speedelec();
         while (input.isEmpty()) {
-            System.out.println("Something goes wrong, try again");
+            System.out.println(ERROR_MESSAGE);
             System.out.println("Type name of brand");
             input = scanner.nextLine();
         }
@@ -26,7 +28,7 @@ public class AddSpeedelec implements Command {
         System.out.println("Type maximum speed (in km/h)");
         input = scanner.nextLine();
         while (checkForNumericalInput(input)) {
-            System.out.println("Something goes wrong, try again");
+            System.out.println(ERROR_MESSAGE);
             System.out.println("Type maximum speed (in km/h)");
             input = scanner.nextLine();
         }
@@ -35,7 +37,7 @@ public class AddSpeedelec implements Command {
         System.out.println("Type weight of the bike (in grams)");
         input = scanner.nextLine();
         while (checkForNumericalInput(input)) {
-            System.out.println("Something goes wrong, try again");
+            System.out.println(ERROR_MESSAGE);
             System.out.println("Type weight of the bike (in grams)");
             input = scanner.nextLine();
         }
@@ -44,7 +46,7 @@ public class AddSpeedelec implements Command {
         System.out.println("Type availability of lights at front and back (TRUE/FALSE)");
         input = scanner.nextLine();
         while (checkForBooleanInput(input)) {
-            System.out.println("Something goes wrong, try again");
+            System.out.println(ERROR_MESSAGE);
             System.out.println("Type availability of lights at front and back (TRUE/FALSE)");
             input = scanner.nextLine();
         }
@@ -53,7 +55,7 @@ public class AddSpeedelec implements Command {
         System.out.println("Type battery capacity (in mAh)");
         input = scanner.nextLine();
         while (checkForNumericalInput(input)) {
-            System.out.println("Something goes wrong, try again");
+            System.out.println(ERROR_MESSAGE);
             System.out.println("Type battery capacity (in mAh)");
             input = scanner.nextLine();
         }
@@ -62,7 +64,7 @@ public class AddSpeedelec implements Command {
         System.out.println("Type color");
         input = scanner.nextLine();
         while (checkForAlphabeticInput(input)) {
-            System.out.println("Something goes wrong, try again");
+            System.out.println(ERROR_MESSAGE);
             System.out.println("Type color");
             input = scanner.nextLine();
         }
@@ -71,7 +73,7 @@ public class AddSpeedelec implements Command {
 
         input = scanner.nextLine();
         while (checkForNumericalInput(input)) {
-            System.out.println("Something goes wrong, try again");
+            System.out.println(ERROR_MESSAGE);
             System.out.println("Type price");
             input = scanner.nextLine();
         }
