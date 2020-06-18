@@ -13,13 +13,13 @@ import java.util.function.Predicate;
 
 public class SearchToolByParameters implements Command {
     /**
-     * This class is responsible to configure filter parameters, their implementations lays in
-     * @package command.searchcommands
+     * This class is responsible to configure filter parameters, their implementations lays in 
+     * service.searchcommands
      * Also u can choose to show first or all results
      */
 
-    private final String ERROR_MESSAGE = "Something goes wrong, try again";
-    private final String NUMERIC_PATTERN = "[0-9]+";
+    private static final String ERROR_MESSAGE = "Something goes wrong, try again";
+    private static final String NUMERIC_PATTERN = "[0-9]+";
     private Map<Integer, String> searchCommands = new HashMap<>();
     private Map<Integer, String> detailsForSearchCommands = new HashMap<>();
     private List<Predicate<AbstractBike>> allPredicates = new ArrayList<>();
