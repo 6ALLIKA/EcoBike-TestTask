@@ -18,6 +18,8 @@ public class SearchToolByParameters implements Command {
      * Also u can choose to show first or all results
      */
 
+    private final String ERROR_MESSAGE = "Something goes wrong, try again";
+    private final String NUMERIC_PATTERN = "[0-9]+";
     private Map<Integer, String> searchCommands = new HashMap<>();
     private Map<Integer, String> detailsForSearchCommands = new HashMap<>();
     private List<Predicate<AbstractBike>> allPredicates = new ArrayList<>();
@@ -46,102 +48,96 @@ public class SearchToolByParameters implements Command {
             if (commandInput == 1) {
                 System.out.println(detailsForSearchCommands.get(commandInput));
                 String input = scanner.nextLine();
+
                 while (input.isEmpty() || !((input.equalsIgnoreCase("E-BIKE")
                         || input.equalsIgnoreCase("FOLDING BIKE")
                         || input.equalsIgnoreCase("SPEEDELEC")))) {
-                    System.out.println("Something goes wrong, try again");
+
+                    System.out.println(ERROR_MESSAGE);
                     System.out.println(detailsForSearchCommands.get(commandInput));
                     input = scanner.nextLine();
                 }
+
                 if (input.equalsIgnoreCase("FOLDING BIKE")) {
                     fillSearchCommandsForClassicModel();
                 } else {
                     fillSearchCommandsForElectroModel();
                 }
+
                 allPredicates.add(command.search(input));
                 searchCommands.remove(commandInput);
+
             } else if (commandInput == 2) {
+
                 System.out.println(detailsForSearchCommands.get(commandInput));
                 String input = scanner.nextLine();
                 while (input.isEmpty()) {
-                    System.out.println("Something goes wrong, try again");
+                    System.out.println(ERROR_MESSAGE);
                     System.out.println(detailsForSearchCommands.get(commandInput));
                     input = scanner.nextLine();
                 }
                 allPredicates.add(command.search(input));
                 searchCommands.remove(commandInput);
+
             } else if (commandInput == 5) {
+
                 System.out.println(detailsForSearchCommands.get(5));
                 String input = scanner.nextLine();
+
                 while (input.isEmpty() || !(input.equalsIgnoreCase("true")
                         || input.equalsIgnoreCase("false"))) {
-                    System.out.println("Something goes wrong, try again");
+
+                    System.out.println(ERROR_MESSAGE);
                     System.out.println(detailsForSearchCommands.get(5));
                     input = scanner.nextLine();
                 }
+
                 allPredicates.add(command.search(input.toLowerCase()));
                 searchCommands.remove(commandInput);
+
             } else if (commandInput == 4) {
+
                 System.out.println(detailsForSearchCommands.get(4));
                 String input = scanner.nextLine();
                 while (input.isEmpty() || !input.matches("[a-zA-Z ]*")) {
-                    System.out.println("Something goes wrong, try again");
+                    System.out.println(ERROR_MESSAGE);
                     System.out.println(detailsForSearchCommands.get(4));
                     input = scanner.nextLine();
                 }
+
                 allPredicates.add(command.search(input.toLowerCase()));
                 searchCommands.remove(commandInput);
+
             } else if (commandInput == 11) {
                 break;
             } else {
+
                 System.out.println(detailsForSearchCommands.get(4));
                 String input = scanner.nextLine();
                 String[] split = input.split(" +");
-                while (!((split.length == 1 && !input.isEmpty() && input.matches("[0-9]+"))
 
-                        || ((split.length == 2 && split[1].matches("[0-9]+"))
+                while (!((split.length == 1 && !input.isEmpty() && input.matches(NUMERIC_PATTERN))
+
+                        || ((split.length == 2 && split[1].matches(NUMERIC_PATTERN))
                         && (split[0].equalsIgnoreCase("less")
                         || split[0].equalsIgnoreCase("more")))
 
-                        || ((split.length == 3 && split[1].matches("[0-9]+")
-                        && split[2].matches("[0-9]+"))
+                        || ((split.length == 3 && split[1].matches(NUMERIC_PATTERN)
+                        && split[2].matches(NUMERIC_PATTERN))
                         && split[0].equalsIgnoreCase("between")))) {
-                    System.out.println("Something goes wrong, try again");
+
+                    System.out.println(ERROR_MESSAGE);
                     System.out.println(detailsForSearchCommands.get(4));
                     input = scanner.nextLine();
                 }
+
                 allPredicates.add(command.search(input));
                 searchCommands.remove(commandInput);
             }
         }
 
-        System.out.println("Please select next option what u want to see from searching" + "\n"
-                + "Type 1 if you want see first single result" + "\n"
-                + "Type 2 if you want see all results");
-        String choice = scanner.nextLine();
+        makeChoiceHowMuchShowResults(scanner, list);
 
-        while (choice.isEmpty() || !(choice.matches("[0-9]+")
-                && (Integer.parseInt(choice) == 1 || Integer.parseInt(choice) == 2))) {
-            System.out.println("Wrong command, try again");
-            choice = scanner.nextLine();
-        }
-
-        Predicate<AbstractBike> compositePredicate =
-                allPredicates.stream().reduce(w -> true, Predicate::and);
-        if (Integer.parseInt(choice) == 1) {
-            list.stream()
-                    .sorted()
-                    .filter(compositePredicate).findFirst()
-                    .map(AbstractBike::toProductLook)
-                    .ifPresent(System.out::println);
-        } else {
-            list.stream()
-                    .sorted()
-                    .filter(compositePredicate)
-                    .map(AbstractBike::toProductLook)
-                    .forEach(System.out::println);
-        }
-        allPredicates.clear();
         return list;
     }
 
@@ -188,5 +184,35 @@ public class SearchToolByParameters implements Command {
     private boolean checkForCommandInput(String input) {
         return input.isEmpty() || !(input.matches("[0-9]+")
                 && (searchCommands.containsKey(Integer.parseInt(input))));
+    }
+
+    private void makeChoiceHowMuchShowResults(Scanner scanner, List<AbstractBike> list) {
+        System.out.println("Please select next option what u want to see from searching" + "\n"
+                + "Type 1 if you want see first single result" + "\n"
+                + "Type 2 if you want see all results");
+        String choice = scanner.nextLine();
+
+        while (choice.isEmpty() || !(choice.matches("[0-9]+")
+                && (Integer.parseInt(choice) == 1 || Integer.parseInt(choice) == 2))) {
+            System.out.println("Wrong command, try again");
+            choice = scanner.nextLine();
+        }
+
+        Predicate<AbstractBike> compositePredicate =
+                allPredicates.stream().reduce(w -> true, Predicate::and);
+        if (Integer.parseInt(choice) == 1) {
+            list.stream()
+                    .sorted()
+                    .filter(compositePredicate).findFirst()
+                    .map(AbstractBike::toProductLook)
+                    .ifPresent(System.out::println);
+        } else {
+            list.stream()
+                    .sorted()
+                    .filter(compositePredicate)
+                    .map(AbstractBike::toProductLook)
+                    .forEach(System.out::println);
+        }
+        allPredicates.clear();
     }
 }
