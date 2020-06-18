@@ -19,6 +19,8 @@
         <sonar.projectKey>6ALLIKA_EcoBike-TestTask</sonar.projectKey>
         <sonar.organization>6allika</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.jacoco.xmlReportPaths>../app-it/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <org.jacoco.version>0.8.5</org.jacoco.version>
     </properties>
 
     <dependencies>
@@ -58,6 +60,19 @@
                     <linkXRef>false</linkXRef>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${org.jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -74,5 +89,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>
