@@ -1,4 +1,4 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.dao.impl.BikeDaoImpl;
 import ecobike.model.AbstractBike;
@@ -6,7 +6,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 import lombok.SneakyThrows;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WriteToFile implements Command {
     /**
      * This implementation has checks that directory or file is exists, it can have Exeption when

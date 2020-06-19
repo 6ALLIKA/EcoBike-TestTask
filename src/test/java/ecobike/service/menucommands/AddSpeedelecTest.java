@@ -1,7 +1,8 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.model.AbstractBike;
 import ecobike.model.Speedelec;
+import ecobike.service.menucommands.AddSpeedelec;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.math.BigDecimal;

@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 class SearchByTypeTest {
     private SearchByType predicate = new SearchByType();
     private static List<AbstractBike> list = new ArrayList<>();
-    private String foldingBike = "FOLDING BIKE";
-    private String speedelec = "E-BIKE";
-    private String eBike = "SPEEDELEC";
+    private final String foldingBike = "FOLDING BIKE";
+    private final String speedelec = "E-BIKE";
+    private final String eBike = "SPEEDELEC";
 
     @BeforeAll
     static void start() {

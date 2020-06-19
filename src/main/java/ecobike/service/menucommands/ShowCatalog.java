@@ -1,11 +1,13 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.dao.impl.BikeDaoImpl;
 import ecobike.model.AbstractBike;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ShowCatalog implements Command {
     /**
      * This class is responsible get objects from file and show them at console

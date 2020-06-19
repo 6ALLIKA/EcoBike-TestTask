@@ -1,9 +1,11 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.model.AbstractBike;
 import java.util.List;
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StopProgramm implements Command {
     /**
      * This implementation has checks that if user have unsaved products, program will ask to
