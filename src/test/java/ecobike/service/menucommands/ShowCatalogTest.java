@@ -41,7 +41,7 @@ class ShowCatalogTest {
         FoldingBike foldingBike = new FoldingBike();
         foldingBike.setBrand("Benetti");
         foldingBike.setWheelSize(24);
-        foldingBike.setGearsQuantity(27);
+        foldingBike.setGearsCount(27);
         foldingBike.setWeight(11400);
         foldingBike.setLights(false);
         foldingBike.setColor("rose");

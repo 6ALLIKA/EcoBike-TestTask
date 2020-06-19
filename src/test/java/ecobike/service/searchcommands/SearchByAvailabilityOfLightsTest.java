@@ -1,5 +1,6 @@
 package ecobike.service.searchcommands;
 
+import ecobike.config.AppConfig;
 import ecobike.model.AbstractBike;
 import ecobike.model.ElectricBike;
 import ecobike.model.FoldingBike;
@@ -12,9 +13,10 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 class SearchByAvailabilityOfLightsTest {
-    private SearchByAvailabilityOfLights predicate = new SearchByAvailabilityOfLights();
+    private static SearchByAvailabilityOfLights predicate;
     private static List<AbstractBike> list = new ArrayList<>();
 
     @BeforeAll
@@ -58,7 +60,7 @@ class SearchByAvailabilityOfLightsTest {
         FoldingBike foldingBike1 = new FoldingBike();
         foldingBike1.setBrand("Benetti");
         foldingBike1.setWheelSize(24);
-        foldingBike1.setGearsQuantity(27);
+        foldingBike1.setGearsCount(27);
         foldingBike1.setWeight(11400);
         foldingBike1.setLights(true);
         foldingBike1.setColor("rose");
@@ -67,7 +69,7 @@ class SearchByAvailabilityOfLightsTest {
         FoldingBike foldingBike2 = new FoldingBike();
         foldingBike2.setBrand("Benetti");
         foldingBike2.setWheelSize(40);
-        foldingBike2.setGearsQuantity(20);
+        foldingBike2.setGearsCount(20);
         foldingBike2.setWeight(11400);
         foldingBike2.setLights(true);
         foldingBike2.setColor("rose");
@@ -76,7 +78,7 @@ class SearchByAvailabilityOfLightsTest {
         FoldingBike foldingBike3 = new FoldingBike();
         foldingBike3.setBrand("Benetti");
         foldingBike3.setWheelSize(20);
-        foldingBike3.setGearsQuantity(40);
+        foldingBike3.setGearsCount(40);
         foldingBike3.setWeight(11400);
         foldingBike3.setLights(true);
         foldingBike3.setColor("rose");
@@ -89,6 +91,10 @@ class SearchByAvailabilityOfLightsTest {
         list.add(electricBike);
         list.add(speedelec2);
         list.add(electricBike2);
+
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+        predicate = context.getBean(SearchByAvailabilityOfLights.class);
     }
 
 

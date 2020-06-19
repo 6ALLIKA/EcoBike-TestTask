@@ -10,14 +10,15 @@
 ---
 
 # <a name="description"></a>Short description
-In this project I attempted to implement a console program. There 7 basic functions:
+In this project I attempted to implement a console program. There are 7 basic functions:
 Show the entire EcoBike catalog
 
+* Show the entire EcoBike catalog
 * Add a new folding bike
 * Add a new speedelec
 * Add a new e-bike
 * Find the items by filter
-* Write to file
+* Write to a file
 * Stop the program
 
 ---

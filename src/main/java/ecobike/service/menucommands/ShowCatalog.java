@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 public class ShowCatalog implements Command {
     /**
      * This class is responsible get objects from file and show them at console
-     * Also program asks you to put how much objects to show
-     * All object have toProductLook() method that have uniwue implementation based on
+     * Also program asks you to input, how much objects to show
+     * All object have toProductLook() method that have unique implementation based on
      * characteristics
      * Also them will be sorted
      */

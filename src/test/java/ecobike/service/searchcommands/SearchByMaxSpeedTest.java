@@ -1,5 +1,6 @@
 package ecobike.service.searchcommands;
 
+import ecobike.config.AppConfig;
 import ecobike.model.AbstractBike;
 import ecobike.model.ElectricBike;
 import ecobike.model.Speedelec;
@@ -11,9 +12,10 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 class SearchByMaxSpeedTest {
-    private SearchByMaxSpeed predicate = new SearchByMaxSpeed();
+    private static SearchByMaxSpeed predicate;
     private static List<AbstractBike> list = new ArrayList<>();
     private int speed = 40;
     private int speed1 = 50;
@@ -61,6 +63,10 @@ class SearchByMaxSpeedTest {
         list.add(electricBike);
         list.add(speedelec2);
         list.add(electricBike2);
+
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+        predicate = context.getBean(SearchByMaxSpeed.class);
     }
 
 

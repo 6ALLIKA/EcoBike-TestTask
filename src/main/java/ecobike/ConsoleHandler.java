@@ -11,27 +11,27 @@ import java.util.Scanner;
 import org.springframework.stereotype.Service;
 
 @Service
-public class App {
+public class ConsoleHandler {
     // common implementation without DB
     private List<AbstractBike> storageBikes = new ArrayList<>();
     private List<AbstractBike> catalogOfBikes = new ArrayList<>();
 
     private final MenuCommandService menuCommandService;
 
-    public App(MenuCommandService menuCommandService) {
+    public ConsoleHandler(MenuCommandService menuCommandService) {
         this.menuCommandService = menuCommandService;
     }
 
     public void start() {
         System.out.println("Please enter path for catalog file in next format, for example");
-        System.out.println("C: Folder Catalog ecobikeFIXED.txt");
+        System.out.println("C: Folder Catalog ecobike.txt");
         System.out.println("Or press Enter to start with default catalog");
 
         ShowCatalog showCatalog = new ShowCatalog();
         Scanner scanner = new Scanner(System.in);
         String path = scanner.nextLine();
         while (!path.equals("")) { // here checking that path to file is valid and exists
-            String pathInput = String.join(File.separator, path.split(" "));
+            String pathInput = String.join(File.separator, path.split(" +"));
             File tmpFile = new File(pathInput);
             if (tmpFile.exists()) {
                 showCatalog.setPath(pathInput);
@@ -49,11 +49,11 @@ public class App {
             System.out.println("3 – Add a new speedelec");
             System.out.println("4 – Add a new e-bike");
             System.out.println("5 – Find the items by filter");
-            System.out.println("6 – Write to file");
+            System.out.println("6 – Write to a file");
             System.out.println("7 – Stop the program");
 
             String input = scanner.nextLine();
-            while (checkForCommandInput(input)) {
+            while (validateCommandInput(input)) {
                 System.out.println("Wrong command, try again");
                 input = scanner.nextLine();
             }
@@ -68,7 +68,7 @@ public class App {
         }
     }
 
-    private boolean checkForCommandInput(String input) {
+    private boolean validateCommandInput(String input) {
         return input.isEmpty() || !(input.matches("[0-9]+")
                 && (Integer.parseInt(input) <= 7 && Integer.parseInt(input) >= 1));
     }

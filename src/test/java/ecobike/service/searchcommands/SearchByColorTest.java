@@ -1,5 +1,6 @@
 package ecobike.service.searchcommands;
 
+import ecobike.config.AppConfig;
 import ecobike.model.AbstractBike;
 import ecobike.model.ElectricBike;
 import ecobike.model.FoldingBike;
@@ -12,9 +13,10 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 class SearchByColorTest {
-    private SearchByColor predicate = new SearchByColor();
+    private static SearchByColor predicate;
     private static List<AbstractBike> list = new ArrayList<>();
     private String rose = "rose";
     private String flame = "flame";
@@ -25,7 +27,7 @@ class SearchByColorTest {
         FoldingBike foldingBike =new FoldingBike();
         foldingBike.setBrand("Benetti");
         foldingBike.setWheelSize(24);
-        foldingBike.setGearsQuantity(27);
+        foldingBike.setGearsCount(27);
         foldingBike.setWeight(11400);
         foldingBike.setLights(false);
         foldingBike.setColor("rose");
@@ -52,6 +54,10 @@ class SearchByColorTest {
         list.add(speedelec);
         list.add(electricBike);
         list.add(foldingBike);
+
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+        predicate = context.getBean(SearchByColor.class);
     }
 
 

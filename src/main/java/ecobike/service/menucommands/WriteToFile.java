@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class WriteToFile implements Command {
     /**
-     * This implementation has checks that directory or file is exists, it can have Exeption when
+     * This implementation has checks that directory or file is exists, it can throw an Exception
+     * when
      * access to folder is denied by system parameters
      */
 
@@ -29,21 +30,21 @@ public class WriteToFile implements Command {
         String pathCheck;
 
         while (true) {
-            pathCheck = String.join(File.separator, path.split(" "));
+            pathCheck = String.join(File.separator, path.split(" +"));
             File tmpFile = new File(pathCheck);
             if (tmpFile.exists()) {
                 break;
             } else {
-                System.out.println("Yours folder is incorrect, please check it and try again");
+                System.out.println("Entered folder is incorrect, please check it and try again");
                 path = scanner.nextLine();
             }
         }
 
-        System.out.println("Please enter file in next format, for example");
+        System.out.println("Please enter file name in the next format:");
         System.out.println("product.txt");
         String fileName = scanner.nextLine();
         while (!(fileName.isEmpty() || fileName.endsWith(".txt"))) {
-            System.out.println("Yours file is incorrect, please check it and try again");
+            System.out.println("Entered file name is incorrect, please check it and try again");
             fileName = scanner.nextLine();
         }
 

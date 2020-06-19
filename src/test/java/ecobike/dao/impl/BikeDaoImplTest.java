@@ -20,13 +20,13 @@ class BikeDaoImplTest {
         FoldingBike foldingBike = new FoldingBike();
         foldingBike.setBrand("Benetti");
         foldingBike.setWheelSize(24);
-        foldingBike.setGearsQuantity(27);
+        foldingBike.setGearsCount(27);
         foldingBike.setWeight(11400);
         foldingBike.setLights(false);
         foldingBike.setColor("rose");
         foldingBike.setPrice(new BigDecimal(1009));
 
-        assertEquals(foldingBike, bikeDao.createClassicBike(data));
+        assertEquals(foldingBike, bikeDao.createFoldingBike(data));
     }
 
     @Test
@@ -89,7 +89,7 @@ class BikeDaoImplTest {
         FoldingBike foldingBike = new FoldingBike();
         foldingBike.setBrand("Benetti");
         foldingBike.setWheelSize(24);
-        foldingBike.setGearsQuantity(27);
+        foldingBike.setGearsCount(27);
         foldingBike.setWeight(11400);
         foldingBike.setLights(false);
         foldingBike.setColor("rose");

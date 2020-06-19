@@ -1,5 +1,6 @@
 package ecobike.service.menucommands;
 
+import ecobike.config.AppConfig;
 import ecobike.model.AbstractBike;
 import ecobike.model.ElectricBike;
 import ecobike.model.FoldingBike;
@@ -15,6 +16,7 @@ import lombok.SneakyThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,6 +27,10 @@ class WriteToFileTest {
     @SneakyThrows
     @Test
     public void check_execute_TRUE() {
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+        writeToFile = context.getBean(WriteToFile.class);
+
         Speedelec speedelec = new Speedelec();
         speedelec.setBrand("E-Scooter");
         speedelec.setMaxSpeed(60);
@@ -46,7 +52,7 @@ class WriteToFileTest {
         FoldingBike foldingBike = new FoldingBike();
         foldingBike.setBrand("Benetti");
         foldingBike.setWheelSize(24);
-        foldingBike.setGearsQuantity(27);
+        foldingBike.setGearsCount(27);
         foldingBike.setWeight(11400);
         foldingBike.setLights(false);
         foldingBike.setColor("rose");

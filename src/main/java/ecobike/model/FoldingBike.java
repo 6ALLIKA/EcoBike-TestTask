@@ -12,7 +12,7 @@ public class FoldingBike extends AbstractBike {
     public String toDataFormat() {
         return getType() + " " + getBrand() + "; "
                 + getWheelSize() + "; "
-                + getGearsQuantity() + "; "
+                + getGearsCount() + "; "
                 + getWeight() + "; "
                 + isLights() + "; "
                 + getColor() + "; "
@@ -22,7 +22,7 @@ public class FoldingBike extends AbstractBike {
     @Override
     public String toProductLook() {
         return getType() + " " + getBrand()
-                + " with " + getGearsQuantity()
+                + " with " + getGearsCount()
                 + " gear(s) and" + (isLights() ? " " : " no ") + "head/tail light." + "\n"
                 + "Price: " + getPrice() + " euros.";
     }
