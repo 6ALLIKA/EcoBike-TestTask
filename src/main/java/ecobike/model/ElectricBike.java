@@ -2,9 +2,7 @@ package ecobike.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.stereotype.Component;
 
-@Component
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class ElectricBike extends AbstractBike {
