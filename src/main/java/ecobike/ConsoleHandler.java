@@ -2,8 +2,8 @@ package ecobike;
 
 import ecobike.model.AbstractBike;
 import ecobike.service.MenuCommandService;
-import ecobike.service.menucommands.Command;
-import ecobike.service.menucommands.ShowCatalog;
+import ecobike.service.impl.menucommands.Command;
+import ecobike.service.impl.menucommands.ShowCatalog;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
