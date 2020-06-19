@@ -1,4 +1,4 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.dao.impl.BikeDaoImpl;
 import ecobike.model.AbstractBike;
@@ -9,10 +9,15 @@ import java.util.List;
 import lombok.SneakyThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 class SearchToolByParametersTest {
-    private SearchToolByParameters searchToolByParameters = new SearchToolByParameters();
-    private BikeDaoImpl bikeDao = new BikeDaoImpl();
+    @Autowired
+    private SearchToolByParameters searchToolByParameters;
+    @Autowired
+    private BikeDaoImpl bikeDao;
 
     @SneakyThrows
     @Test

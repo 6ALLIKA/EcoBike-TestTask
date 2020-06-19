@@ -3,7 +3,9 @@ package ecobike.service.searchcommands;
 import ecobike.model.AbstractBike;
 import java.math.BigDecimal;
 import java.util.function.Predicate;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SearchByPrice implements SearchCommand {
 
     @Override

@@ -1,18 +1,26 @@
 package ecobike;
 
 import ecobike.model.AbstractBike;
-import ecobike.service.Command;
-import ecobike.service.CommandStrategy;
-import ecobike.service.ShowCatalog;
+import ecobike.service.MenuCommandService;
+import ecobike.service.menucommands.Command;
+import ecobike.service.menucommands.ShowCatalog;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.springframework.stereotype.Service;
 
+@Service
 public class App {
     // common implementation without DB
     private List<AbstractBike> storageBikes = new ArrayList<>();
     private List<AbstractBike> catalogOfBikes = new ArrayList<>();
+
+    private final MenuCommandService menuCommandService;
+
+    public App(MenuCommandService menuCommandService) {
+        this.menuCommandService = menuCommandService;
+    }
 
     public void start() {
         System.out.println("Please enter path for catalog file in next format, for example");
@@ -51,7 +59,7 @@ public class App {
             }
 
             int commandInput = Integer.parseInt(input);
-            Command command = new CommandStrategy().getCommand(commandInput);
+            Command command = menuCommandService.getCommand(commandInput);
             if ((1 == commandInput) || (5 == commandInput)) {
                 command.execute(catalogOfBikes);
             } else {

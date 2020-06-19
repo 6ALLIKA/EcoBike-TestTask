@@ -24,6 +24,10 @@ Show the entire EcoBike catalog
 
 ## <a name="structure">Project structure
 
+* Spring v5.2.6.RELEASE
+  * context
+  
+- JUnit v5.6.2
 - SonarCloud Scan v1.2
 - maven-checkstyle-plugin
 - Lombok v1.18.12

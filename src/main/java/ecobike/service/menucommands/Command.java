@@ -1,4 +1,4 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.model.AbstractBike;
 import java.util.List;

@@ -13,7 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.SneakyThrows;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class BikeDaoImpl implements BikeDao {
 
     @SneakyThrows

@@ -1,38 +1,49 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.model.AbstractBike;
-import ecobike.model.Speedelec;
+import ecobike.model.FoldingBike;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 
-public class AddSpeedelec implements Command {
+@Component
+public class AddFoldingBike implements Command {
     private static final String ERROR_MESSAGE = "Something goes wrong, try again";
 
     @Override
     public List<AbstractBike> execute(List<AbstractBike> list) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Lets add new SPEEDELEC");
+        System.out.println("Lets add new FOLDING BIKE");
         System.out.println("Enter values by following types");
 
         System.out.println("Type name of brand");
         String input = scanner.nextLine();
-        Speedelec product = new Speedelec();
+        FoldingBike product = new FoldingBike();
         while (input.isEmpty()) {
             System.out.println(ERROR_MESSAGE);
             System.out.println("Type name of brand");
             input = scanner.nextLine();
         }
-        product.setBrand(input.replace(" +", " "));
+        product.setBrand(input.replace(" +", " ").trim());
 
-        System.out.println("Type maximum speed (in km/h)");
+        System.out.println("Type size of the wheels (in inch)");
         input = scanner.nextLine();
         while (checkForNumericalInput(input)) {
             System.out.println(ERROR_MESSAGE);
-            System.out.println("Type maximum speed (in km/h)");
+            System.out.println("Type size of the wheels (in inch)");
             input = scanner.nextLine();
         }
         product.setWheelSize(Integer.parseInt(input));
+
+        System.out.println("Type number of gears");
+        input = scanner.nextLine();
+        while (checkForNumericalInput(input)) {
+            System.out.println(ERROR_MESSAGE);
+            System.out.println("Type number of gears");
+            input = scanner.nextLine();
+        }
+        product.setGearsQuantity(Integer.parseInt(input));
 
         System.out.println("Type weight of the bike (in grams)");
         input = scanner.nextLine();
@@ -52,15 +63,6 @@ public class AddSpeedelec implements Command {
         }
         product.setLights(Boolean.parseBoolean(input.toLowerCase()));
 
-        System.out.println("Type battery capacity (in mAh)");
-        input = scanner.nextLine();
-        while (checkForNumericalInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type battery capacity (in mAh)");
-            input = scanner.nextLine();
-        }
-        product.setGearsQuantity(Integer.parseInt(input));
-
         System.out.println("Type color");
         input = scanner.nextLine();
         while (checkForAlphabeticInput(input)) {
@@ -69,8 +71,8 @@ public class AddSpeedelec implements Command {
             input = scanner.nextLine();
         }
         product.setColor(input.replace(" +", " ").trim());
-        System.out.println("Type price");
 
+        System.out.println("Type price");
         input = scanner.nextLine();
         while (checkForNumericalInput(input)) {
             System.out.println(ERROR_MESSAGE);

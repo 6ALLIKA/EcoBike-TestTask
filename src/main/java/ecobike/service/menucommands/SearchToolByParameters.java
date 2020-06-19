@@ -1,16 +1,19 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.dao.impl.BikeDaoImpl;
 import ecobike.model.AbstractBike;
+import ecobike.service.SearchCommandService;
 import ecobike.service.searchcommands.SearchCommand;
-import ecobike.service.searchcommands.SearchCommandStrategy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Predicate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SearchToolByParameters implements Command {
     /**
      * This class is responsible to configure filter parameters, their implementations lays in 
@@ -23,12 +26,21 @@ public class SearchToolByParameters implements Command {
     private Map<Integer, String> searchCommands = new HashMap<>();
     private Map<Integer, String> detailsForSearchCommands = new HashMap<>();
     private List<Predicate<AbstractBike>> allPredicates = new ArrayList<>();
+    private final SearchCommandService searchCommandService;
+    private final BikeDaoImpl bikeDao;
+    private final ShowCatalog showCatalog;
+
+    @Autowired
+    public SearchToolByParameters(SearchCommandService searchCommandService,
+                                  BikeDaoImpl bikeDao, ShowCatalog showCatalog) {
+        this.searchCommandService = searchCommandService;
+        this.bikeDao = bikeDao;
+        this.showCatalog = showCatalog;
+    }
 
     @Override
     public List<AbstractBike> execute(List<AbstractBike> list) {
-        ShowCatalog searchCommand = new ShowCatalog();
-        BikeDaoImpl bikeDao = new BikeDaoImpl();
-        bikeDao.getAll(searchCommand.getPath(), list);
+        bikeDao.getAll(showCatalog.getPath(), list);
         fillSearchBasicCommands();
         fillDetailsForSearchCommands();
         Scanner scanner = new Scanner(System.in);
@@ -44,7 +56,7 @@ public class SearchToolByParameters implements Command {
                 userInput = scanner.nextLine();
             }
             int commandInput = Integer.parseInt(userInput);
-            SearchCommand command = new SearchCommandStrategy().getCommand(commandInput);
+            SearchCommand command = searchCommandService.getCommand(commandInput);
             if (commandInput == 1) {
                 System.out.println(detailsForSearchCommands.get(commandInput));
                 String input = scanner.nextLine();

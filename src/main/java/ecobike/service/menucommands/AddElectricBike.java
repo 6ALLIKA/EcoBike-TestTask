@@ -1,47 +1,31 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.model.AbstractBike;
-import ecobike.model.FoldingBike;
+import ecobike.model.ElectricBike;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 
-public class AddFoldingBike implements Command {
+@Component
+public class AddElectricBike implements Command {
     private static final String ERROR_MESSAGE = "Something goes wrong, try again";
 
     @Override
     public List<AbstractBike> execute(List<AbstractBike> list) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Lets add new FOLDING BIKE");
+        System.out.println("Lets add new E-BIKE");
         System.out.println("Enter values by following types");
 
         System.out.println("Type name of brand");
         String input = scanner.nextLine();
-        FoldingBike product = new FoldingBike();
+        ElectricBike product = new ElectricBike();
         while (input.isEmpty()) {
             System.out.println(ERROR_MESSAGE);
             System.out.println("Type name of brand");
             input = scanner.nextLine();
         }
-        product.setBrand(input.replace(" +", " ").trim());
-
-        System.out.println("Type size of the wheels (in inch)");
-        input = scanner.nextLine();
-        while (checkForNumericalInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type size of the wheels (in inch)");
-            input = scanner.nextLine();
-        }
-        product.setWheelSize(Integer.parseInt(input));
-
-        System.out.println("Type number of gears");
-        input = scanner.nextLine();
-        while (checkForNumericalInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type number of gears");
-            input = scanner.nextLine();
-        }
-        product.setGearsQuantity(Integer.parseInt(input));
+        product.setBrand(input.replace(" +", " "));
 
         System.out.println("Type weight of the bike (in grams)");
         input = scanner.nextLine();
@@ -52,6 +36,15 @@ public class AddFoldingBike implements Command {
         }
         product.setWeight(Integer.parseInt(input));
 
+        System.out.println("Type maximum speed (in km/h)");
+        input = scanner.nextLine();
+        while (checkForNumericalInput(input)) {
+            System.out.println(ERROR_MESSAGE);
+            System.out.println("Type maximum speed (in km/h)");
+            input = scanner.nextLine();
+        }
+        product.setWheelSize(Integer.parseInt(input));
+
         System.out.println("Type availability of lights at front and back (TRUE/FALSE)");
         input = scanner.nextLine();
         while (checkForBooleanInput(input)) {
@@ -60,6 +53,15 @@ public class AddFoldingBike implements Command {
             input = scanner.nextLine();
         }
         product.setLights(Boolean.parseBoolean(input.toLowerCase()));
+
+        System.out.println("Type battery capacity (in mAh)");
+        input = scanner.nextLine();
+        while (checkForNumericalInput(input)) {
+            System.out.println(ERROR_MESSAGE);
+            System.out.println("Type battery capacity (in mAh)");
+            input = scanner.nextLine();
+        }
+        product.setGearsQuantity(Integer.parseInt(input));
 
         System.out.println("Type color");
         input = scanner.nextLine();

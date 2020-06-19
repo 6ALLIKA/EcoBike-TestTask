@@ -1,38 +1,31 @@
-package ecobike.service;
+package ecobike.service.menucommands;
 
 import ecobike.model.AbstractBike;
-import ecobike.model.ElectricBike;
+import ecobike.model.Speedelec;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 
-public class AddElectricBike implements Command {
+@Component
+public class AddSpeedelec implements Command {
     private static final String ERROR_MESSAGE = "Something goes wrong, try again";
 
     @Override
     public List<AbstractBike> execute(List<AbstractBike> list) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Lets add new E-BIKE");
+        System.out.println("Lets add new SPEEDELEC");
         System.out.println("Enter values by following types");
 
         System.out.println("Type name of brand");
         String input = scanner.nextLine();
-        ElectricBike product = new ElectricBike();
+        Speedelec product = new Speedelec();
         while (input.isEmpty()) {
             System.out.println(ERROR_MESSAGE);
             System.out.println("Type name of brand");
             input = scanner.nextLine();
         }
         product.setBrand(input.replace(" +", " "));
-
-        System.out.println("Type weight of the bike (in grams)");
-        input = scanner.nextLine();
-        while (checkForNumericalInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type weight of the bike (in grams)");
-            input = scanner.nextLine();
-        }
-        product.setWeight(Integer.parseInt(input));
 
         System.out.println("Type maximum speed (in km/h)");
         input = scanner.nextLine();
@@ -42,6 +35,15 @@ public class AddElectricBike implements Command {
             input = scanner.nextLine();
         }
         product.setWheelSize(Integer.parseInt(input));
+
+        System.out.println("Type weight of the bike (in grams)");
+        input = scanner.nextLine();
+        while (checkForNumericalInput(input)) {
+            System.out.println(ERROR_MESSAGE);
+            System.out.println("Type weight of the bike (in grams)");
+            input = scanner.nextLine();
+        }
+        product.setWeight(Integer.parseInt(input));
 
         System.out.println("Type availability of lights at front and back (TRUE/FALSE)");
         input = scanner.nextLine();
@@ -69,8 +71,8 @@ public class AddElectricBike implements Command {
             input = scanner.nextLine();
         }
         product.setColor(input.replace(" +", " ").trim());
-
         System.out.println("Type price");
+
         input = scanner.nextLine();
         while (checkForNumericalInput(input)) {
             System.out.println(ERROR_MESSAGE);
