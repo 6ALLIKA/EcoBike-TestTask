@@ -16,7 +16,7 @@
         <maven.checkstyle.plugin.configLocation>
             https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
-        <sonar.projectKey>6ALLIKA_EcoBike-Test-Task</sonar.projectKey>
+        <sonar.projectKey>6ALLIKA_EcoBike-TestTask</sonar.projectKey>
         <sonar.organization>6allika</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <spring.version>5.2.6.RELEASE</spring.version>
