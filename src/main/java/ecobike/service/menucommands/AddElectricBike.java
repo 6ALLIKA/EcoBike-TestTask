@@ -29,7 +29,7 @@ public class AddElectricBike implements Command {
 
         System.out.println("Type weight of the bike (in grams)");
         input = scanner.nextLine();
-        while (checkForNumericalInput(input)) {
+        while (validateNumericalInput(input)) {
             System.out.println(ERROR_MESSAGE);
             System.out.println("Type weight of the bike (in grams)");
             input = scanner.nextLine();
@@ -38,7 +38,7 @@ public class AddElectricBike implements Command {
 
         System.out.println("Type maximum speed (in km/h)");
         input = scanner.nextLine();
-        while (checkForNumericalInput(input)) {
+        while (validateNumericalInput(input)) {
             System.out.println(ERROR_MESSAGE);
             System.out.println("Type maximum speed (in km/h)");
             input = scanner.nextLine();
@@ -47,7 +47,7 @@ public class AddElectricBike implements Command {
 
         System.out.println("Type availability of lights at front and back (TRUE/FALSE)");
         input = scanner.nextLine();
-        while (checkForBooleanInput(input)) {
+        while (validateBooleanInput(input)) {
             System.out.println(ERROR_MESSAGE);
             System.out.println("Type availability of lights at front and back (TRUE/FALSE)");
             input = scanner.nextLine();
@@ -56,16 +56,16 @@ public class AddElectricBike implements Command {
 
         System.out.println("Type battery capacity (in mAh)");
         input = scanner.nextLine();
-        while (checkForNumericalInput(input)) {
+        while (validateNumericalInput(input)) {
             System.out.println(ERROR_MESSAGE);
             System.out.println("Type battery capacity (in mAh)");
             input = scanner.nextLine();
         }
-        product.setGearsQuantity(Integer.parseInt(input));
+        product.setGearsCount(Integer.parseInt(input));
 
         System.out.println("Type color");
         input = scanner.nextLine();
-        while (checkForAlphabeticInput(input)) {
+        while (validateAlphabeticInput(input)) {
             System.out.println(ERROR_MESSAGE);
             System.out.println("Type color");
             input = scanner.nextLine();
@@ -74,7 +74,7 @@ public class AddElectricBike implements Command {
 
         System.out.println("Type price");
         input = scanner.nextLine();
-        while (checkForNumericalInput(input)) {
+        while (validateNumericalInput(input)) {
             System.out.println(ERROR_MESSAGE);
             System.out.println("Type price");
             input = scanner.nextLine();
@@ -85,15 +85,15 @@ public class AddElectricBike implements Command {
         return list;
     }
 
-    private boolean checkForAlphabeticInput(String input) {
+    private boolean validateAlphabeticInput(String input) {
         return input.isEmpty() || !input.matches("[a-zA-Z ]*");
     }
 
-    private boolean checkForNumericalInput(String input) {
+    private boolean validateNumericalInput(String input) {
         return input.isEmpty() || !input.matches("[0-9]+");
     }
 
-    private boolean checkForBooleanInput(String input) {
+    private boolean validateBooleanInput(String input) {
         return input.isEmpty()
                 || !(input.equalsIgnoreCase("true")
                 || input.equalsIgnoreCase("false"));

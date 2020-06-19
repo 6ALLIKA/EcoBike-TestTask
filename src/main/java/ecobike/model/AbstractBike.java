@@ -11,7 +11,7 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
     private boolean lights;
     private String color;
     private BigDecimal price;
-    private int gearsQuantity;
+    private int gearsCount;
     private int wheelSize;
     private int maxSpeed;
     private int batteryCapacity;
@@ -31,7 +31,7 @@ public abstract class AbstractBike implements Comparable<AbstractBike> {
             return brandCmp;
         }
         if (getType().equals("FOLDING BIKE") && getType().equals(o.getType())) {
-            int gearsQuantityCmp = Integer.compare(getGearsQuantity(), o.getGearsQuantity());
+            int gearsQuantityCmp = Integer.compare(getGearsCount(), o.getGearsCount());
             if (gearsQuantityCmp != 0) {
                 return gearsQuantityCmp;
             }

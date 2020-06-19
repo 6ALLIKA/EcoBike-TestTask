@@ -31,7 +31,7 @@ public class BikeDaoImpl implements BikeDao {
         if (catalog.isEmpty()) {
             for (String data : inputFile(path)) {
                 if (data.charAt(0) == 'F') {
-                    catalog.add(createClassicBike(data));
+                    catalog.add(createFoldingBike(data));
                     continue;
                 }
                 if (data.charAt(0) == 'E') {
@@ -54,7 +54,7 @@ public class BikeDaoImpl implements BikeDao {
         return result;
     }
 
-    public FoldingBike createClassicBike(String data) {
+    public FoldingBike createFoldingBike(String data) {
         String[] splitData = data.split("; ");
         int i = 0;
         FoldingBike product = new FoldingBike();
@@ -63,7 +63,7 @@ public class BikeDaoImpl implements BikeDao {
                 .skip(2)
                 .collect(Collectors.joining(" ")));
         product.setWheelSize(Integer.parseInt(splitData[i++]));
-        product.setGearsQuantity(Integer.parseInt(splitData[i++]));
+        product.setGearsCount(Integer.parseInt(splitData[i++]));
         product.setWeight(Integer.parseInt(splitData[i++]));
         product.setLights(Boolean.parseBoolean(splitData[i++]));
         product.setColor(splitData[i++]);

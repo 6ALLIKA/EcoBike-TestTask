@@ -2,7 +2,6 @@ package ecobike.service.menucommands;
 
 import ecobike.model.AbstractBike;
 import ecobike.model.FoldingBike;
-import ecobike.service.menucommands.AddFoldingBike;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
@@ -21,7 +20,7 @@ class AddFoldingBikeTest {
         FoldingBike foldingBike = new FoldingBike();
         foldingBike.setBrand("Benetti");
         foldingBike.setWheelSize(24);
-        foldingBike.setGearsQuantity(27);
+        foldingBike.setGearsCount(27);
         foldingBike.setWeight(11400);
         foldingBike.setLights(false);
         foldingBike.setColor("rose");

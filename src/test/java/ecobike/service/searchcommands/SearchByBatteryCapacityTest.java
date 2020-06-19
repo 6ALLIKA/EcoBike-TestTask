@@ -1,5 +1,6 @@
 package ecobike.service.searchcommands;
 
+import ecobike.config.AppConfig;
 import ecobike.model.AbstractBike;
 import ecobike.model.ElectricBike;
 import ecobike.model.Speedelec;
@@ -11,9 +12,10 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 class SearchByBatteryCapacityTest {
-    private SearchByBatteryCapacity predicate = new SearchByBatteryCapacity();
+    private static SearchByBatteryCapacity predicate;
     private static List<AbstractBike> list = new ArrayList<>();
     private int battery = 16000;
     private int battery1 = 11000;
@@ -61,6 +63,10 @@ class SearchByBatteryCapacityTest {
         list.add(electricBike);
         list.add(speedelec2);
         list.add(electricBike2);
+
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+        predicate = context.getBean(SearchByBatteryCapacity.class);
     }
 
 

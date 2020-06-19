@@ -1,5 +1,6 @@
 package ecobike.service.searchcommands;
 
+import ecobike.config.AppConfig;
 import ecobike.model.AbstractBike;
 import ecobike.model.FoldingBike;
 import java.math.BigDecimal;
@@ -10,9 +11,10 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 class SearchByNumberOfGearsTest {
-    private SearchByNumberOfGears predicate = new SearchByNumberOfGears();
+    private static SearchByNumberOfGears predicate;
     private static List<AbstractBike> list = new ArrayList<>();
     private int size = 30;
     private int size1 = 10;
@@ -23,7 +25,7 @@ class SearchByNumberOfGearsTest {
         FoldingBike foldingBike1 = new FoldingBike();
         foldingBike1.setBrand("Benetti");
         foldingBike1.setWheelSize(24);
-        foldingBike1.setGearsQuantity(27);
+        foldingBike1.setGearsCount(27);
         foldingBike1.setWeight(11400);
         foldingBike1.setLights(false);
         foldingBike1.setColor("rose");
@@ -32,7 +34,7 @@ class SearchByNumberOfGearsTest {
         FoldingBike foldingBike2 = new FoldingBike();
         foldingBike2.setBrand("Benetti");
         foldingBike2.setWheelSize(40);
-        foldingBike2.setGearsQuantity(20);
+        foldingBike2.setGearsCount(20);
         foldingBike2.setWeight(11400);
         foldingBike2.setLights(false);
         foldingBike2.setColor("rose");
@@ -41,7 +43,7 @@ class SearchByNumberOfGearsTest {
         FoldingBike foldingBike3 = new FoldingBike();
         foldingBike3.setBrand("Benetti");
         foldingBike3.setWheelSize(20);
-        foldingBike3.setGearsQuantity(40);
+        foldingBike3.setGearsCount(40);
         foldingBike3.setWeight(11400);
         foldingBike3.setLights(false);
         foldingBike3.setColor("rose");
@@ -50,12 +52,16 @@ class SearchByNumberOfGearsTest {
         list.add(foldingBike1);
         list.add(foldingBike2);
         list.add(foldingBike3);
+
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+        predicate = context.getBean(SearchByNumberOfGears.class);
     }
 
 
     @Test
     void search_whenLess_TRUE() {
-        Predicate<AbstractBike> expected = b -> b.getGearsQuantity() < size;
+        Predicate<AbstractBike> expected = b -> b.getGearsCount() < size;
         String parameter = "less 30";
         assertEquals(list.stream().filter(expected).collect(Collectors.toList()),
                 list.stream().filter(predicate.search(parameter)).collect(Collectors.toList()));
@@ -63,7 +69,7 @@ class SearchByNumberOfGearsTest {
 
     @Test
     void search_whenMore_TRUE() {
-        Predicate<AbstractBike> expected = b -> b.getGearsQuantity() > size;
+        Predicate<AbstractBike> expected = b -> b.getGearsCount() > size;
         String parameter = "more 30";
         assertEquals(list.stream().filter(expected).collect(Collectors.toList()),
                 list.stream().filter(predicate.search(parameter)).collect(Collectors.toList()));
@@ -71,8 +77,8 @@ class SearchByNumberOfGearsTest {
 
     @Test
     void search_whenBetween_TRUE() {
-        Predicate<AbstractBike> expected = b -> (Math.min(size1, size2)) < b.getGearsQuantity()
-                && b.getGearsQuantity() < (Math.max(size1, size2));
+        Predicate<AbstractBike> expected = b -> (Math.min(size1, size2)) < b.getGearsCount()
+                && b.getGearsCount() < (Math.max(size1, size2));
         String parameter = "between 10 50";
         assertEquals(list.stream().filter(expected).collect(Collectors.toList()),
                 list.stream().filter(predicate.search(parameter)).collect(Collectors.toList()));
@@ -80,7 +86,7 @@ class SearchByNumberOfGearsTest {
 
     @Test
     void search_whenExact_TRUE() {
-        Predicate<AbstractBike> expected = b -> b.getGearsQuantity() == size;
+        Predicate<AbstractBike> expected = b -> b.getGearsCount() == size;
         String parameter = "30";
         assertEquals(list.stream().filter(expected).collect(Collectors.toList()),
                 list.stream().filter(predicate.search(parameter)).collect(Collectors.toList()));

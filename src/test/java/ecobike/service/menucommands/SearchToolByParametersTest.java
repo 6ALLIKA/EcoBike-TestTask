@@ -1,5 +1,6 @@
 package ecobike.service.menucommands;
 
+import ecobike.config.AppConfig;
 import ecobike.dao.impl.BikeDaoImpl;
 import ecobike.model.AbstractBike;
 import java.io.BufferedInputStream;
@@ -9,19 +10,20 @@ import java.util.List;
 import lombok.SneakyThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@Component
 class SearchToolByParametersTest {
-    @Autowired
     private SearchToolByParameters searchToolByParameters;
-    @Autowired
     private BikeDaoImpl bikeDao;
 
     @SneakyThrows
     @Test
     public void check_execute_TRUE() {
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+        searchToolByParameters = context.getBean(SearchToolByParameters.class);
+        bikeDao = context.getBean(BikeDaoImpl.class);
+
         List<AbstractBike> expected = new ArrayList<>();
         bikeDao.getAll("src/main/resources/ecobike.txt", expected);
 
