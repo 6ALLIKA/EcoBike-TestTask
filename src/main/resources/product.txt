@@ -1,1 +1,2 @@
-FOLDING BIKE ываыв; 22; 2; 2; true; dsfsd; 22
+FOLDING BIKE Brand; 100; 2; 222; true; gray; 22
+SPEEDELEC speedelec; 0; 22; false; 0; blue; 12

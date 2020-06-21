@@ -1,10 +1,6 @@
 
 Lankeleisi
-cvbf345
-sdf34f
-23fdsdf
-2342dfs
-50
+
 cvbf345
 sdf34f
 23fdsdf
@@ -15,11 +11,7 @@ sdf34f
 fals
 treu
 false
-cvbf345
-sdf34f
-23fdsdf
-2342dfs
-30000
+
 cvbf345
 sdf34f
 23fdsdf
@@ -30,3 +22,13 @@ sdf34f
 23fdsdf
 2342dfs
 859
+cvbf345
+sdf34f
+23fdsdf
+2342dfs
+50
+cvbf345
+sdf34f
+23fdsdf
+2342dfs
+30000

@@ -2,13 +2,12 @@ package ecobike.service.impl.menucommands;
 
 import ecobike.model.AbstractBike;
 import ecobike.model.Speedelec;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddSpeedelec implements Command {
+public class AddSpeedelec extends BikeCreator implements Command {
     private static final String ERROR_MESSAGE = "Something goes wrong, try again";
 
     @Override
@@ -17,85 +16,14 @@ public class AddSpeedelec implements Command {
         System.out.println("Lets add new SPEEDELEC");
         System.out.println("Enter values by following types");
 
-        System.out.println("Type name of brand");
-        String input = scanner.nextLine();
-        Speedelec product = new Speedelec();
-        while (input.isEmpty()) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type name of brand");
-            input = scanner.nextLine();
-        }
-        product.setBrand(input.replace(" +", " "));
+        AbstractBike product = new Speedelec();
+        String input = "";
 
-        System.out.println("Type maximum speed (in km/h)");
-        input = scanner.nextLine();
-        while (validateNumericalInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type maximum speed (in km/h)");
-            input = scanner.nextLine();
-        }
-        product.setWheelSize(Integer.parseInt(input));
+        super.makeCommonPart(product, input, scanner);
+        super.makeUniquePartForElectricBikeModel(product, input, scanner);
 
-        System.out.println("Type weight of the bike (in grams)");
-        input = scanner.nextLine();
-        while (validateNumericalInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type weight of the bike (in grams)");
-            input = scanner.nextLine();
-        }
-        product.setWeight(Integer.parseInt(input));
-
-        System.out.println("Type availability of lights at front and back (TRUE/FALSE)");
-        input = scanner.nextLine();
-        while (validateBooleanInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type availability of lights at front and back (TRUE/FALSE)");
-            input = scanner.nextLine();
-        }
-        product.setLights(Boolean.parseBoolean(input.toLowerCase()));
-
-        System.out.println("Type battery capacity (in mAh)");
-        input = scanner.nextLine();
-        while (validateNumericalInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type battery capacity (in mAh)");
-            input = scanner.nextLine();
-        }
-        product.setGearsCount(Integer.parseInt(input));
-
-        System.out.println("Type color");
-        input = scanner.nextLine();
-        while (validateAlphabeticInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type color");
-            input = scanner.nextLine();
-        }
-        product.setColor(input.replace(" +", " ").trim());
-        System.out.println("Type price");
-
-        input = scanner.nextLine();
-        while (validateNumericalInput(input)) {
-            System.out.println(ERROR_MESSAGE);
-            System.out.println("Type price");
-            input = scanner.nextLine();
-        }
-        product.setPrice(new BigDecimal(input));
         list.add(product);
 
         return list;
-    }
-
-    private boolean validateAlphabeticInput(String input) {
-        return input.isEmpty() || !input.matches("[a-zA-Z ]*");
-    }
-
-    private boolean validateNumericalInput(String input) {
-        return input.isEmpty() || !input.matches("[0-9]+");
-    }
-
-    private boolean validateBooleanInput(String input) {
-        return input.isEmpty()
-                || !(input.equalsIgnoreCase("true")
-                || input.equalsIgnoreCase("false"));
     }
 }
