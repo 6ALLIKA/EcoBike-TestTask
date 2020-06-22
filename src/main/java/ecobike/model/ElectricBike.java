@@ -3,7 +3,7 @@ package ecobike.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class ElectricBike extends AbstractBike {
     private String type = "E-BIKE";

@@ -79,7 +79,7 @@ public class BikeDaoImpl implements BikeDao {
                 .stream(splitData[i++].split(" "))
                 .skip(1)
                 .collect(Collectors.joining(" ")));
-        product.setWheelSize(Integer.parseInt(splitData[i++]));
+        product.setMaxSpeed(Integer.parseInt(splitData[i++]));
         product.setWeight(Integer.parseInt(splitData[i++]));
         product.setLights(Boolean.parseBoolean(splitData[i++]));
         product.setBatteryCapacity(Integer.parseInt(splitData[i++]));

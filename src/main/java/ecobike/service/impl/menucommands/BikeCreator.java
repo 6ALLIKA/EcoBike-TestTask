@@ -89,7 +89,7 @@ public abstract class BikeCreator {
             System.out.println("Type maximum speed (in km/h)");
             input = scanner.nextLine();
         }
-        product.setWheelSize(Integer.parseInt(input));
+        product.setMaxSpeed(Integer.parseInt(input));
 
         System.out.println("Type battery capacity (in mAh)");
         input = scanner.nextLine();
@@ -98,7 +98,7 @@ public abstract class BikeCreator {
             System.out.println("Type battery capacity (in mAh)");
             input = scanner.nextLine();
         }
-        product.setGearsCount(Integer.parseInt(input));
+        product.setBatteryCapacity(Integer.parseInt(input));
 
         return product;
     }
