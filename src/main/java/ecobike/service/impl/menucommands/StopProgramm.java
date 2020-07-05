@@ -13,7 +13,7 @@ public class StopProgramm implements Command {
      */
 
     @Override
-    public List<AbstractBike> execute(List<AbstractBike> list) {
+    public List<AbstractBike> execute(List<AbstractBike> list, String pathToFile) {
         if (!list.isEmpty()) {
             System.out.println("You have unsaved changes, do you want to save them?");
             System.out.println("Type y/n (yes/no)");
@@ -30,7 +30,7 @@ public class StopProgramm implements Command {
             if (choice.equalsIgnoreCase("yes")
                     || choice.equalsIgnoreCase("y")) {
                 WriteToFile writeToFile = new WriteToFile();
-                writeToFile.execute(list);
+                writeToFile.execute(list, pathToFile);
             } else {
                 scanner.close();
                 System.exit(0);

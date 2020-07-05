@@ -3,38 +3,42 @@ package ecobike;
 import ecobike.model.AbstractBike;
 import ecobike.service.MenuCommandService;
 import ecobike.service.impl.menucommands.Command;
-import ecobike.service.impl.menucommands.ShowCatalog;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Service
-public class ConsoleHandler {
+public class ConsoleHandler extends Thread {
     // common implementation without DB
+    private String pathToFile = "src/main/resources/ecobike.txt";
     private List<AbstractBike> storageBikes = new ArrayList<>();
     private List<AbstractBike> catalogOfBikes = new ArrayList<>();
 
     private final MenuCommandService menuCommandService;
 
+    @Autowired
     public ConsoleHandler(MenuCommandService menuCommandService) {
         this.menuCommandService = menuCommandService;
     }
 
-    public void start() {
+    public void run() {
         System.out.println("Please enter path for catalog file in next format, for example");
         System.out.println("C: Folder Catalog ecobike.txt");
         System.out.println("Or press Enter to start with default catalog");
 
-        ShowCatalog showCatalog = new ShowCatalog();
         Scanner scanner = new Scanner(System.in);
         String path = scanner.nextLine();
         while (!path.equals("")) { // here checking that path to file is valid and exists
             String pathInput = String.join(File.separator, path.split(" +"));
             File tmpFile = new File(pathInput);
             if (tmpFile.exists()) {
-                showCatalog.setPath(pathInput);
+                pathToFile = pathInput;
                 break;
             } else {
                 System.out.println("Yours path is incorrect, please check it and try again");
@@ -61,9 +65,9 @@ public class ConsoleHandler {
             int commandInput = Integer.parseInt(input);
             Command command = menuCommandService.getCommand(commandInput);
             if ((1 == commandInput) || (5 == commandInput)) {
-                command.execute(catalogOfBikes);
+                command.execute(catalogOfBikes, pathToFile);
             } else {
-                command.execute(storageBikes);
+                command.execute(storageBikes, pathToFile);
             }
         }
     }

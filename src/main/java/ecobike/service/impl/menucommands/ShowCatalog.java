@@ -5,6 +5,7 @@ import ecobike.model.AbstractBike;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,21 +17,16 @@ public class ShowCatalog implements Command {
      * characteristics
      * Also them will be sorted
      */
+    private final BikeDaoImpl bikeDao;
 
-    private String path = "src/main/resources/ecobike.txt";
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getPath() {
-        return path;
+    @Autowired
+    public ShowCatalog(BikeDaoImpl bikeDao) {
+        this.bikeDao = bikeDao;
     }
 
     @Override
-    public List<AbstractBike> execute(List<AbstractBike> list) {
-        BikeDaoImpl bikeDao = new BikeDaoImpl();
-        bikeDao.getAll(path, list);
+    public List<AbstractBike> execute(List<AbstractBike> list, String pathToFile) {
+        bikeDao.getAll(pathToFile, list);
         Scanner scanner = new Scanner(System.in);
         list = list.stream().sorted().collect(Collectors.toList());
         System.out.println("Enter value how much product show on page");
@@ -38,7 +34,7 @@ public class ShowCatalog implements Command {
         String input = scanner.nextLine();
 
         while (checkForCommandInput(input)) {
-            System.out.println("Enter numbet please, try again");
+            System.out.println("Enter please number, try again");
             input = scanner.nextLine();
         }
 

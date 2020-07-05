@@ -18,7 +18,7 @@ public class WriteToFile implements Command {
 
     @SneakyThrows
     @Override
-    public List<AbstractBike> execute(List<AbstractBike> list) {
+    public List<AbstractBike> execute(List<AbstractBike> list, String pathToFile) {
         if (list.isEmpty()) {
             System.out.println("You dont add anything, add something to save in file");
             return list;
