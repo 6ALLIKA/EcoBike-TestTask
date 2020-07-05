@@ -32,7 +32,7 @@ class AddElectricBikeTest {
         List<AbstractBike> actual = new ArrayList<>();
         System.setIn(new BufferedInputStream(new FileInputStream("src/test/resources"
                 + "/createEBIKE-test.txt")));
-        addElectricBike.execute(actual);
+        addElectricBike.execute(actual, "path");
 
         assertEquals(expected, actual);
     }

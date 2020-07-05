@@ -23,9 +23,9 @@ public class SearchToolByParameters implements Command {
 
     private static final String ERROR_MESSAGE = "Something goes wrong, try again";
     private static final String NUMERIC_PATTERN = "[0-9]+";
-    private Map<Integer, String> searchCommands = new HashMap<>();
-    private Map<Integer, String> detailsForSearchCommands = new HashMap<>();
-    private List<Predicate<AbstractBike>> allPredicates = new ArrayList<>();
+    private final Map<Integer, String> searchCommands = new HashMap<>();
+    private final Map<Integer, String> detailsForSearchCommands = new HashMap<>();
+    private final List<Predicate<AbstractBike>> allPredicates = new ArrayList<>();
     private final SearchCommandService searchCommandService;
     private final BikeDaoImpl bikeDao;
     private final ShowCatalog showCatalog;
@@ -39,8 +39,10 @@ public class SearchToolByParameters implements Command {
     }
 
     @Override
-    public List<AbstractBike> execute(List<AbstractBike> list) {
-        bikeDao.getAll(showCatalog.getPath(), list);
+    public List<AbstractBike> execute(List<AbstractBike> list, String pathToFile) {
+        if (list.isEmpty()) {
+            bikeDao.getAll(pathToFile, list);
+        }
         fillSearchBasicCommands();
         fillDetailsForSearchCommands();
         Scanner scanner = new Scanner(System.in);
@@ -75,7 +77,6 @@ public class SearchToolByParameters implements Command {
                 } else {
                     fillSearchCommandsForElectroModel();
                 }
-
                 allPredicates.add(command.search(input));
                 searchCommands.remove(commandInput);
 
@@ -211,7 +212,7 @@ public class SearchToolByParameters implements Command {
         }
 
         Predicate<AbstractBike> compositePredicate =
-                allPredicates.stream().reduce(w -> true, Predicate::and);
+                allPredicates.stream().reduce(predicate -> true, Predicate::and);
         if (Integer.parseInt(choice) == 1) {
             list.stream()
                     .sorted()

@@ -64,7 +64,7 @@ class WriteToFileTest {
         products.add(foldingBike);
         System.setIn(new BufferedInputStream(new FileInputStream("src/test/resources"
                 + "/WriteToFile-test.txt")));
-        writeToFile.execute(products);
+        writeToFile.execute(products, "path");
 
         List<String> expected = new ArrayList<>();
         expected.add("SPEEDELEC E-Scooter; 60; 15300; false; 14800; marine; 309");

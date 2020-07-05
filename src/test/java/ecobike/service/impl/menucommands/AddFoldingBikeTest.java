@@ -32,7 +32,7 @@ class AddFoldingBikeTest {
         List<AbstractBike> actual = new ArrayList<>();
         System.setIn(new BufferedInputStream(new FileInputStream("src/test/resources/"
                 + "createFOLDINGBIKE-test.txt")));
-        addFoldingBike.execute(actual);
+        addFoldingBike.execute(actual, "path");
 
         assertEquals(expected, actual);
     }

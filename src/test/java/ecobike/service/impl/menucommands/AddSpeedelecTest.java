@@ -32,7 +32,7 @@ class AddSpeedelecTest {
         List<AbstractBike> actual = new ArrayList<>();
         System.setIn(new BufferedInputStream(new FileInputStream("src/test/resources"
                 + "/createSpeedelec-test.txt")));
-        addSpeedelec.execute(actual);
+        addSpeedelec.execute(actual, "path");
 
         assertEquals(expected, actual);
     }

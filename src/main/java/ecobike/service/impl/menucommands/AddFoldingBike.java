@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class AddFoldingBike extends BikeCreator implements Command {
 
     @Override
-    public List<AbstractBike> execute(List<AbstractBike> list) {
+    public List<AbstractBike> execute(List<AbstractBike> list, String pathToFile) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Lets add new FOLDING BIKE");
         System.out.println("Enter values by following types");

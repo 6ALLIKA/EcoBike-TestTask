@@ -3,6 +3,7 @@ package ecobike.service.impl.menucommands;
 import ecobike.service.MenuCommandService;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +21,7 @@ public class MenuCommandServiceImpl implements MenuCommandService {
     private final StopProgramm stopProgramm;
     private Map<Integer, Command> map = new ConcurrentHashMap<>();
 
+    @Autowired
     public MenuCommandServiceImpl(ShowCatalog showCatalog, AddFoldingBike addFoldingBike,
                                   AddSpeedelec addSpeedelec, AddElectricBike addElectricBike,
                                   SearchToolByParameters searchToolByParameters,

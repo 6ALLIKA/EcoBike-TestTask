@@ -8,10 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AddSpeedelec extends BikeCreator implements Command {
-    private static final String ERROR_MESSAGE = "Something goes wrong, try again";
 
     @Override
-    public List<AbstractBike> execute(List<AbstractBike> list) {
+    public List<AbstractBike> execute(List<AbstractBike> list, String pathToFile) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Lets add new SPEEDELEC");
         System.out.println("Enter values by following types");

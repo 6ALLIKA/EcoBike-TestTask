@@ -1,5 +1,6 @@
 package ecobike.service.impl.menucommands;
 
+import ecobike.dao.impl.BikeDaoImpl;
 import ecobike.model.AbstractBike;
 import ecobike.model.ElectricBike;
 import ecobike.model.FoldingBike;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 class ShowCatalogTest {
-    private ShowCatalog showCatalog = new ShowCatalog();
+    private ShowCatalog showCatalog = new ShowCatalog(new BikeDaoImpl());
 
     @SneakyThrows
     @Test
@@ -56,8 +57,7 @@ class ShowCatalogTest {
         List<AbstractBike> actual = new ArrayList<>();
         System.setIn(new BufferedInputStream(new FileInputStream("src/test/resources"
                 + "/showCatalog-test.txt")));
-        showCatalog.setPath("src/test/resources/ecobikeFIXED.txt");
         assertEquals(expected.stream().sorted().collect(Collectors.toList()),
-                showCatalog.execute(actual));
+                showCatalog.execute(actual, "src/test/resources/ecobikeFIXED.txt"));
     }
 }

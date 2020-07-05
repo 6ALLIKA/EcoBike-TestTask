@@ -31,6 +31,6 @@ class SearchToolByParametersTest {
         System.setIn(new BufferedInputStream(new FileInputStream("src/test/resources"
                 + "/searchByFilters-test.txt")));
 
-        assertEquals(expected, searchToolByParameters.execute(actual));
+        assertEquals(expected, searchToolByParameters.execute(actual, "src/main/resources/ecobike.txt"));
     }
 }
