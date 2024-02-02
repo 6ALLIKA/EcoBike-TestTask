@@ -19,7 +19,7 @@
         <sonar.projectKey>6ALLIKA_EcoBike-TestTask</sonar.projectKey>
         <sonar.organization>6allika</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <spring.version>5.2.6.RELEASE</spring.version>
+        <spring.version>5.2.22.RELEASE</spring.version>
     </properties>
 
     <dependencies>
